@@ -6,9 +6,9 @@ const port = 4000;
 const users = require("./routes/users");
 const app = express();
 
-app.use(express.json());
+
 // Rutas importadas
-app.use(users);
+users(app);
 
 // Ruta Principal ('/')
 app.get("/", (req, res) => {
