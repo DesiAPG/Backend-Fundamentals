@@ -4,12 +4,18 @@ const router = express.Router();
 
 const users = (router) => {
   router.get("/users", (req, res) => {
-    database.connection.query("SELECT * FROM USERS");
+    database.connection.query(
+      "SELECT * FROM USERS",
+      (error, result, fields) => {
+        console.log(error);
+        console.log(result);
+        console.log(fields);
+      }
+    );
     res.json({
       ruta: "users",
     });
   });
-
   router.get("/login", (req, res) => {
     res.json({
       ruta: "login",
