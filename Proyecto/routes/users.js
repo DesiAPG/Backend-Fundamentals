@@ -7,14 +7,14 @@ const users = (router) => {
     database.connection.query(
       "SELECT * FROM USERS",
       (error, result, fields) => {
-        console.log(error);
-        console.log(result);
-        console.log(fields);
+        if (error) {
+          res.json({
+            message: error.sqlMessage,
+          });
+        }
+        res.json(result);
       }
     );
-    res.json({
-      ruta: "users",
-    });
   });
   router.get("/login", (req, res) => {
     res.json({
