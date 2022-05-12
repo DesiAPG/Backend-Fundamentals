@@ -19,7 +19,20 @@
       alt="mac"
     />
     <script>
-      fetch("/users").then().catch();
+      fetch("/users")
+        .then((res) => {
+          return res.json();
+        })
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((e) => {
+          console.log(e);
+        });
+
+      async function results(params) {
+        const resultado = await fetch("/users");
+      }
     </script>
   </body>
 </html>

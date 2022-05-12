@@ -8,4 +8,23 @@ const connection = mysql.createConnection({
   password: "D1000239",
 });
 
-module.exports = { connection };
+function query(sql) {
+  const miPromesa = new Promise(function (resolve, reject) {
+    database.connection.query(sql, function (error, result, fields) {
+      if (error != null) {
+        console.log(error);
+
+        return reject({
+          error: true,
+          message: error.sqlMessage,
+        });
+      } else {
+        return resolve(result);
+      }
+    });
+  });
+
+  return miPromesa;
+}
+
+module.exports = { connection, query };

@@ -3,18 +3,14 @@ const database = require("../libs/database.js");
 const router = express.Router();
 
 const users = (router) => {
-  router.get("/users", (req, res) => {
-    database.connection.query(
-      "SELECT * FROM USERS",
-      (error, result, fields) => {
-        if (error) {
-          res.json({
-            message: error.sqlMessage,
-          });
-        }
-        res.json(result);
-      }
-    );
+  router.get("/users", async (req, res) => {
+    try {
+      const data = await database.query("SELECT * FROM USERS");
+      console.log(data);
+      return res.json(data);
+    } catch (error) {
+      console.log(error);
+    }
   });
   router.get("/login", (req, res) => {
     res.json({
