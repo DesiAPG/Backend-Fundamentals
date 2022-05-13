@@ -12,7 +12,7 @@ users(app);
 
 // Ruta Principal ('/')
 app.get("/", (req, res) => {
-  return res.sendFile(path.join(__dirname, "views", "index.html"));
+  
 });
 
 // Puerto de escucha

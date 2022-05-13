@@ -1,4 +1,5 @@
 const express = require("express");
+const view = require("../helpers/views.js");
 const database = require("../libs/database.js");
 const router = express.Router();
 
@@ -6,10 +7,12 @@ const users = (router) => {
   router.get("/users", async (req, res) => {
     try {
       const data = await database.query("SELECT * FROM USERS");
-      console.log(data);
       return res.json(data);
     } catch (error) {
-      console.log(error);
+      return res.json({
+        error: true,
+        message: "An error ocurred try again",
+      });
     }
   });
   router.get("/login", (req, res) => {
@@ -19,9 +22,11 @@ const users = (router) => {
   });
 
   router.get("/registro", (req, res) => {
-    res.json({
-      ruta: "users",
-    });
+    return view("signUp.html", res);
+  });
+  router.get("/registro", (req, res) => {
+    const body = req.body;
+    return res.json(user);
   });
 };
 
