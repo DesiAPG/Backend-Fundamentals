@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const res = require("express/lib/response");
 
 class User {
   constructor(data) {
@@ -7,6 +8,7 @@ class User {
     this.username = data.username;
     this.birthdate = data.birthdate;
     this.password = data.password;
+    this.data = data;
   }
 
   validate() {
@@ -44,14 +46,17 @@ class User {
     try {
       const result = await database.query("INSERT INTO user(??) VALUES(?)");
       [Object.keys(data), Object.values(data)];
+      return result;
     } catch (error) {
       console.log(error);
     }
   }
 
-  async encrypt() {
+  async encrypt(string) {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(string, salt);
     return hash;
   }
 }
+
+module.exports = User;
