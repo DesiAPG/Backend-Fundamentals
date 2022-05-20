@@ -23,11 +23,11 @@ router.get("/login", function (req, res) {
     ruta: "login",
   });
 });
-router.get("/signup", function (req, res) {
+router.get("/registro", function (req, res) {
   return view("signUp.html", res);
 });
 
-router.post("/signUp", async function (req, res) {
+router.post("/registro", async function (req, res) {
   const user = new User(req.body);
   const validation = user.validate();
 
@@ -38,7 +38,7 @@ router.post("/signUp", async function (req, res) {
   return res.json(validation);
 });
 
-router.get("/login", async function (req, res) {
+router.get("/inicio_sesion", async function (req, res) {
   return view("logIn.html", res);
 });
 router.post("/inicio_sesion", async function (req, res) {

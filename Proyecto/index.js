@@ -7,17 +7,17 @@ const app = express();
 const port = 4000;
 const users = require("./routes/users");
 
-
 //Middlewares
 app.use("/static", express.static(path.join(__dirname, "static")));
 app.use(express.json());
 
 // Rutas importadas
-users(app);
+app.use(users);
 
 // Ruta Principal ('/')
-app.get("/", (req, res) => {
-  return res.render("index");
+app.get("/", function (req, res) {
+  console.log(__dirname); // Ubicación o ruta de nuestro proyecto
+  return res.sendFile(path.join(__dirname, "views", "index.html"));
 });
 
 // Puerto de escucha
