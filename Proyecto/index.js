@@ -6,18 +6,11 @@ const express = require("express");
 const app = express();
 const port = 4000;
 const users = require("./routes/users");
-const create  = require("express-handlebars");
-const hbs = create({
-  layoutsDir: path.join(app.get("views"), "layouts"),
-  partialsDir: path.join(app.get("views"), "partials"),
-  defaulLayout: "main",
-  extname: ".hbs",
-});
 
-//Handlebars
-app.set("views", path.join(__dirname, "views"));
-app.engine(".hbs", hbs.engine);
-app.set("view engine", ".hbs");
+
+//Middlewares
+app.use("/static", express.static(path.join(__dirname, "static")));
+app.use(express.json());
 
 // Rutas importadas
 users(app);

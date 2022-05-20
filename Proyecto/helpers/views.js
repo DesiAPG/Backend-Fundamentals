@@ -1,8 +1,7 @@
-const { builtinModules } = require("module");
 const path = require("path");
 
-function view(htmlFile, res) {
-  return res.sendFile(path.join(__dirname, "..", "views", htmlFile));
+function view(htmlFileName, res) {
+  return res.sendFile(path.join(__dirname, "..", "views", htmlFileName));
 }
 
 module.exports = view;

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form id="login">
+      <!-- x-www-urlencoded -->
+      <input type="email" name="email" />
+      <input type="password" name="password" />
+      <button>Registrarme</button>
+    </form>
+    <p id="message"></p>
+
+    <script>
+      const loginForm = document.getElementById("login");
+      const message = document.getElementById("message");
+
+      loginForm.onsubmit = function (event) {
+        event.preventDefault();
+
+        fetch("/inicio_sesion", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            email: loginForm.email.value,
+            password: loginForm.password.value,
+          }),
+        })
+          .then(function (response) {
+            return response.json();
+          })
+          .then(function (data) {
+            if (!data.success) {
+              message.innerText = data.message;
+            } else {
+              const user = data.user;
+              message.innerText = "";
+              // Guardar data en el navegador
+              localStorage.setItem("id", user.id);
+              localStorage.setItem("name", user.name);
+              localStorage.setItem("username", user.username);
+              localStorage.setItem("email", user.email);
+              // Redirección
+              location.href = "/";
+            }
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      };
+    </script>
+  </body>
+</html>

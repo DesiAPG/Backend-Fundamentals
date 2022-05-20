@@ -23,33 +23,75 @@ class User {
     ) {
       return {
         message: "Debes ingresar todos los campos",
-        validate: false,
+        validated: false,
       };
     }
 
     if (this.username.lenght < 3) {
       return {
         message: "The username must have more than 3 letters",
-        validate: false,
+        validated: false,
       };
     }
+    return {
+      validated: true,
+    };
   }
 
   async save() {
     const data = {
-      name: data.name,
-      email: data.email,
-      username: data.username,
-      birthdate: data.birthdate,
+      name: this.name,
+      email: this.email,
       password: await this.encrypt(this.password),
+      username: this.username,
+      birthday: this.birthday,
     };
     try {
-      const result = await database.query("INSERT INTO user(??) VALUES(?)");
-      [Object.keys(data), Object.values(data)];
-      return result;
+      const result = await database.query("INSERT INTO users(??) VALUES(?)", [
+        Object.keys(data),
+        Object.values(data),
+      ]);
+
+      console.log(result);
+
+      delete data.password;
+      data.id = result.insertId;
+
+      return {
+        user: data,
+        success: true,
+        message: "Usuario registrado correctamente",
+      };
     } catch (error) {
-      console.log(error);
+      return error;
     }
+  }
+
+  async login() {
+    const result = await database.query("SELECT * FROM users WHERE email = ?", [
+      this.email,
+    ]);
+    const user = result[0];
+    if (user) {
+      if (await this.compare(this.password, user.password)) {
+        delete user.password;
+        return {
+          success: true,
+          user,
+          message: "Usuario correcto",
+        };
+      } else {
+        return {
+          success: false,
+          message: "Credenciales incorrectas",
+        };
+      }
+    }
+
+    return {
+      success: false,
+      message: "Usuario no registrado",
+    };
   }
 
   async encrypt(string) {
