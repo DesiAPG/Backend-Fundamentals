@@ -1,6 +1,11 @@
 const express = require("express");
+const path = require("path");
 const { port } = require("./config");
 const app = express();
+
+// Middlewares
+
+app.use(express.static(path.join(__dirname, "static")));
 
 // Router
 const auth = require("./routes/auth");
