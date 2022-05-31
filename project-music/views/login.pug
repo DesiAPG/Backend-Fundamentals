@@ -1,7 +1,16 @@
 extends layouts/main-layout.pug
 
 block title 
-    login 
+    title Login
 
 block content 
-    p(class='bg-green-700') Holas
+    h1 Hola mundo
+    p(class="text-red-500") Tzuzul
+    p(class="text-green-400") Otro texto
+    p(class="text-purple-400") Otro texto
+
+    p(class="text-blue-600") #{id}
+
+    each user in lista
+        div
+            p #{user}
