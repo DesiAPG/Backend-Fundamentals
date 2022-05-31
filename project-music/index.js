@@ -17,9 +17,7 @@ app.set("views", "views");
 app.use(auth);
 
 app.get("/", (req, res) => {
-  res.json({
-    hola: "hello world",
-  });
+  res.render("home");
 });
 
 app.listen(port, () => {
