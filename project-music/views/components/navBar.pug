@@ -1,11 +1,12 @@
-nav(class="bg-gray-900")
-    ul(class="flex text-white p-5 gap-5")
-        li 
-            a(href="/") Home 
-        li 
-            a(href="/login") Login 
-        li 
-            a(href="/") Link
-        li 
-            a(href="/") Link 
-        li #{username}
+div(class='max-w-full bg-gray-900')
+    nav(class="max-w-6xl m-auto")
+        ul(class="flex justify-end text-white p-5 gap-5 ")
+            li 
+                a(href="/" class='hover:text-slate-300') Home 
+            li 
+                a(href="/login" class='hover:text-slate-300') Login 
+            li 
+                a(href="/" class='hover:text-slate-300') About
+            li 
+                a(href="/" class='hover:text-slate-300') Contact 
+            li #{username}
