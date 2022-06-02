@@ -3,14 +3,21 @@ extends layouts/main-layout.pug
 block title 
     title Login
 
-block content 
-    h1 Hola mundo
-    p(class="text-red-500") Tzuzul
-    p(class="text-green-400") Otro texto
-    p(class="text-purple-400") Otro texto
+block content
+    div(class='max-w-6xl flex justify-center m-auto')
+        div(class='flex gap-16 ')
+            img(src="https://images.pexels.com/photos/8930336/pexels-photo-8930336.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260", alt="img", class='h-screen')
+            div(class='py-8')
+                h1(class='py-5 text-lg') Hola mundo
+                    div(class='flex flex-col ')
+                        form(action="", method='post')
+                        div(class='flex flex-col gap-2')
+                            p Nombre
+                            input(type="text", name="name" class='rounded focus:outline-none') 
+                            p contraseña
+                            input(type="password", name="password" class='rounded focus:outline-none') 
+                            button(type="submit") Submit
 
-    p(class="text-blue-600") #{id}
-
-    each user in lista
-        div
-            p #{user}
+                        each user in lista
+                            div
+                                p #{user}
