@@ -18,6 +18,5 @@ block content
                             input(type="password", name="password" class='rounded focus:outline-none') 
                             button(type="submit") Submit
 
-                        each user in lista
-                            div
-                                p #{user}
+                        if error
+                            p(class='bg-red-200 text-red-600 p-3 w-max') #{error}
